@@ -81,7 +81,9 @@ void hack_start(const char *_game_data_dir) {
     LOGI("%s: %p - %p",TargetLibName, g_TargetModule.start_address, g_TargetModule.end_address);
 
     // TODO: hooking/patching here
-    PATCH("libil2cpp.so", "0xD074F8", "00 00 A0 E3 1E FF 2F E1");
+    MemoryPatch::createWithHex(targetLibName,
+                                                    string2Offset(OBFUSCATE("0xD074F8")),
+                                                    OBFUSCATE("00 00 A0 E3 1E FF 2F E1"));
 }
 
 void hack_prepare(const char *_game_data_dir) {
